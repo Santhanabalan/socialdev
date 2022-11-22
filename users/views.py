@@ -3,9 +3,12 @@ from users.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .forms import CustomUserCreationForm
 # Create your views here.
 def loginUser(request):
+    page = 'login'
     if request.user.is_authenticated:
         return redirect('profiles')
     if request.method == 'POST':
@@ -24,7 +27,8 @@ def loginUser(request):
             return redirect('profiles')
         else:
             messages.error(request,"Password Incorrect")
-    return render (request,'users/login_register.html')
+    context = {'page':page}
+    return render (request,'users/login_register.html',context)
 
 def logoutUser(request):
     logout(request)
@@ -41,3 +45,22 @@ def userProfile(request,pk):
     otherSkills = profile.skill_set.filter(description="")
     context = {'profile':profile,'topSkills':topSkills,'otherSkills':otherSkills}
     return render (request,'users/user-profile.html',context)
+
+def registerUser(request):
+    page='register'
+    form = CustomUserCreationForm()
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+
+            messages.success(request,"User Created Successfully")
+            login(request,user)
+            return redirect('profiles')
+        else:
+            messages.error(request,"Error during registration")
+    context = {'page':page,'form':form}
+    return render (request,'users/login_register.html',context)
+
