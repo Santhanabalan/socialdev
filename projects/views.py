@@ -1,13 +1,16 @@
 from django.shortcuts import render,redirect
 from projects.models import Project
 from projects.forms import ProjectForm
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .utils import searchProjects
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from .utils import searchProjects,paginateProjects
 
 # Create your views here.
 def projects(request):
     projects,search = searchProjects(request)
-    context = {'projects':projects,'search':search}
+    custom_index,projects = paginateProjects(request,projects,6)
+    context = {'projects':projects,'search':search,'custom_index':custom_index}
     return render(request,'projects/projects.html',context)
 
 def project(request,pk):
@@ -25,7 +28,7 @@ def createProject(request):
         if form.is_valid():
             project = form.save(commit=False)
             project.owner = profile
-            project.saev()
+            project.save()
             return redirect ('account')
     context={'form':form}
     return render(request,'projects/project-form.html',context)
