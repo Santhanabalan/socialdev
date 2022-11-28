@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import CustomUserCreationForm, ProfileForm, SkillForm
+from .utils import searchProfiles
 # Create your views here.
 def loginUser(request):
     page = 'login'
@@ -35,8 +36,8 @@ def logoutUser(request):
     messages.success(request,"Logged out Successfully")
     return render (request,'users/login_register.html')
 def profiles(request):
-    profiles = Profile.objects.all()
-    context = {'profiles':profiles}
+    search , profiles = searchProfiles(request)
+    context = {'profiles':profiles,'search':search}
     return render (request,'users/profiles.html',context)
 
 def userProfile(request,pk):

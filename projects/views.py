@@ -2,11 +2,12 @@ from django.shortcuts import render,redirect
 from projects.models import Project
 from projects.forms import ProjectForm
 from django.contrib.auth.decorators import login_required
+from .utils import searchProjects
 
 # Create your views here.
 def projects(request):
-    projects = Project.objects.all()
-    context = {'projects':projects}
+    projects,search = searchProjects(request)
+    context = {'projects':projects,'search':search}
     return render(request,'projects/projects.html',context)
 
 def project(request,pk):
