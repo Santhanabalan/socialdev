@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from projects.models import Project
-from projects.forms import ProjectForm
+from projects.forms import ProjectForm,ReviewForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -16,7 +16,17 @@ def projects(request):
 def project(request,pk):
     projectObj = Project.objects.get(id=pk)
     tags = projectObj.tags.all()
-    context = {'project':projectObj,'tags':tags}
+    form = ReviewForm()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        review = form.save(commit=False)
+        review.project = projectObj
+        review.owner = request.user.profile
+        review.save()
+        messages.success(request,'Vote Submitted Succefully')
+        return redirect('project',pk=projectObj.id)
+    context = {'project':projectObj,'tags':tags,'form':form}
     return render(request,'projects/single-project.html',context)
 
 @login_required(login_url="login")
