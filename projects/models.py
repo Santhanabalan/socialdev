@@ -36,8 +36,8 @@ class Project(models.Model):
         
     @property
     def getvoteCount(self):
-        reviews = slef.review_set.all().count()
-        upVotes = reviews.filter(value='up')
+        reviews = self.review_set.all()
+        upVotes = reviews.filter(value='up').count()
         totalVotes = reviews.count()
 
         ratio = (upVotes/totalVotes) * 100
