@@ -23,6 +23,17 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.username)
 
+    class Meta:
+        ordering = ['created']
+
+    @property
+    def imgURL(self):
+        try:
+            url = self.profile_image.url
+        except:
+            url = ''
+        return url
+
 class Skill(models.Model):
     owner = models.ForeignKey(Profile,null=True,blank=True,on_delete=models.SET_NULL)
     name = models.CharField(max_length=200,null=True,blank=True)

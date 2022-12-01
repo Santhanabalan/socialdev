@@ -34,7 +34,7 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     messages.success(request,"Logged out Successfully")
-    return render (request,'users/login_register.html')
+    return redirect('login')
 def profiles(request):
     search , profiles = searchProfiles(request)
     custom_index,profiles = paginateProfiles(request,profiles,6)
