@@ -16,6 +16,13 @@
                     {{field}}
                 </div>
                 {% endfor %}
+                {% for tag in project.tags.all %}
+                <div class="form__field">
+                    <div class="project-tag tag tag--pill tag--main" data-tag="{{tag.id}}" data-project="{{project.id}}">
+                        {{tag.name}} &#215;
+                    </div>
+                </div>
+                {% endfor %}
                 <label for="formInput#text">Enter Tags:</label>
                 <input class="input input--text" id="formInput#text" type="text" name="newtags"
                     placeholder="Add new tags..." />
@@ -25,4 +32,16 @@
         </div>
     </div>
 </main>
+<script>
+    let tags = document.getElementsByClassName('project-tag')
+    for (let i =0; tags.length > i; i++){
+        tags[i].addEventListener('click',(e)=>{
+            let tagId = e.target.dataset.tag
+            let projectId = e.target.dataset.project
+            console.log(tagId,projectId)
+
+        })
+
+    }
+</script>
 {% endblock content %}
