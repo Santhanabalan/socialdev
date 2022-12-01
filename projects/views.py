@@ -73,8 +73,3 @@ def deleteProject(request,pk):
         return redirect ('account')
     context={'object':project}
     return render(request,'delete-object.html',context)
-
-# @api_view(['DELETE'])
-# def removeTag(request):
-#     tagId = request.data['tag']
-#     return response('Tag was Deleted!')

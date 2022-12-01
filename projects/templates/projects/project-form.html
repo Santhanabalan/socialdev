@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 <main class="formPage my-xl">
     <div class="content-box">
@@ -32,16 +32,5 @@
         </div>
     </div>
 </main>
-<script>
-    let tags = document.getElementsByClassName('project-tag')
-    for (let i =0; tags.length > i; i++){
-        tags[i].addEventListener('click',(e)=>{
-            let tagId = e.target.dataset.tag
-            let projectId = e.target.dataset.project
-            console.log(tagId,projectId)
-
-        })
-
-    }
-</script>
+<script src="{% static 'js/tag.js' %}"></script>
 {% endblock content %}
