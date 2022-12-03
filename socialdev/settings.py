@@ -180,7 +180,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5500",
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.comsole.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -202,3 +202,5 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = ['https://socialdev.santhanabalan.ml']
