@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     "corsheaders",
+    'storages',
 ]
 
 REST_FRAMEWORK = {
@@ -204,3 +205,12 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ['https://socialdev.santhanabalan.ml']
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_QUERYSTRING_AUTH = False
+
+AWS_S3_ACCESS_KEY_ID = os.getenv('AWS_AKID')
+AWS_S3_SECRET_ACCESS_KEY = os.getenv('AWS_SAK')
+AWS_STORAGE_BUCKET_NAME = 'santhanabalan'
+AWS_S3_FILE_OVERWRITE = False
