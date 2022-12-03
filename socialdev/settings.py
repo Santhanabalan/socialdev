@@ -181,7 +181,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5500",
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.comsole.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
