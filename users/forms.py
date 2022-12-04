@@ -6,9 +6,9 @@ from .models import Profile,Skill,Message
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['first_name','email','password1','password2']
+        fields = ['username','email','password1','password2']
         labels = {
-            'first_name':'Name',
+            'username':'Name',
         }
 
     def __init__(self,*args,**kwargs):

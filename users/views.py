@@ -53,9 +53,14 @@ def registerUser(request):
     form = CustomUserCreationForm()
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username.lower()
+            username = user.username.lower()
+            if User.objects.filter(username = username).first():
+                messages.error(request, "This username is already taken")
+                return redirect('login')
+            user.username = username
             user.save()
 
             messages.success(request,"User Created Successfully")

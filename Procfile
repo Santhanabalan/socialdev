@@ -1,1 +1,1 @@
-web: gunicorn 'socialdev.wsgi'
+web: gunicorn socialdev.wsgi --log-file -

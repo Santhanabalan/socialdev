@@ -11,9 +11,9 @@ def createProfile(sender,instance,created,**kwargs):
         user=instance
         profile=Profile.objects.create(
             user=user,
+            name=user.username,
             username=user.username,
             email=user.email,
-            name=user.first_name,
         )
         subject = "Welcome to SocialDev!"
         message = "We are glad you've joined us!"
