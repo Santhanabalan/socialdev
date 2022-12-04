@@ -1,13 +1,23 @@
-let searchForm = document.getElementById('searchForm')
-let pagelink = document.getElementsByClassName('page-link')
 
-if(searchForm){
-  for(let i=0;pagelink.length>i;i++){
-    pagelink[i].addEventListener('click' ,function (e){
-      e.preventDefault()
-      let page = this.dataset.page
-      searchForm.innerHTML += `<input value=${page} name="page">`
-      searchForm.submit()
-    })
-  }
+//GET SEARCH FORM AND PAGE LINKS
+let searchForm = document.getElementById('searchForm')
+let pageLinks = document.getElementsByClassName('page-link')
+
+//ENSURE SEARCH FORM EXISTS
+if (searchForm) {
+    for (let i = 0; pageLinks.length > i; i++) {
+        pageLinks[i].addEventListener('click', function (e) {
+            e.preventDefault()
+
+            //GET THE DATA ATTRIBUTE
+            let page = this.dataset.page
+
+            //ADD HIDDEN SEARCH INPUT TO FORM
+            searchForm.innerHTML += `<input value=${page} name="page" hidden/>`
+
+
+            //SUBMIT FORM
+            searchForm.submit()
+        })
+    }
 }
