@@ -34,7 +34,7 @@ if IS_PRODUCTION == 'True':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','socialdev.santhanabalan.ml']
+ALLOWED_HOSTS = ['localhost','socialdev.santhanabalan.tech']
 
 
 # Application definition
